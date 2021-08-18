@@ -145,11 +145,8 @@ const countValues = (list) =>{
         }
     });
 
-    let valuesKeys = Object.keys(countValues);
-    let valuesValues = Object.values(countValues);
-
-    for (let i = 0; i < valuesKeys.length; i++){
-        strCountArr.push(`${valuesKeys[i]}(${valuesValues[i]})`)
+    for (let key in countValues){
+        strCountArr.push(`${key}(${countValues[key]})`)
     }
 
     return strCountArr.join(' ')
@@ -164,7 +161,7 @@ const testCountValues1 = () =>{
 
 const testCountValues2 = () =>{
     let result = countValues("11 12 15 3 45 13 11 12 15 3 45 13 11 12 15 3 45 13");
-    let expected = "11(3) 12(3) 15(3) 3(3) 45(3) 13(3)";
+    let expected = "3(3) 11(3) 12(3) 13(3) 15(3) 45(3)";
 
     console.assert(result === expected, `Esperado: ${expected}, Obtido: ${result}`);
 }
@@ -174,7 +171,7 @@ const testCountValues2 = () =>{
 const evaluateExpression = (str, obj) =>{
     let objKeys = Object.keys(obj);
     let strArr = str.split(' ');
-    let newStr = "";
+    let newStr;
 
     for (let i = 0; i < strArr.length; i++){
         if (objKeys.includes(strArr[i])){
